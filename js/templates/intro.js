@@ -1,4 +1,5 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import greetingScreen from "./greeting";
 
 const template = `
 <div id="intro" class="intro">
@@ -18,5 +19,12 @@ const template = `
 </footer>`;
 
 const introScreen = renderScreen(template);
+
+const asterisk = introScreen.querySelector(`.intro__asterisk`);
+
+asterisk.addEventListener(`click`, () => {
+  changeScreen(greetingScreen);
+});
+
 
 export default introScreen;

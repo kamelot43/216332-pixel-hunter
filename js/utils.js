@@ -4,9 +4,9 @@ export const renderScreen = (element) => {
   return wrapper;
 };
 
-export const changeTemplate = (idx) => {
-  if (idx >= MIN_INDEX && idx < MAX_INDEX) {
-    changeScreen(idx);
-    currentIndex = idx;
-  }
+const mainElement = document.querySelector(`.central`);
+
+export const changeScreen = (element) => {
+  mainElement.innerHTML = ``;
+  mainElement.appendChild(element);
 };

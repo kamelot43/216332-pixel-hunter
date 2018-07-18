@@ -1,4 +1,5 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import greetingScreen from "./greeting";
 
 const template = `
 <header class="header">
@@ -121,4 +122,9 @@ const template = `
 </footer>`;
 
 const statsScreen = renderScreen(template);
+const backArrow = statsScreen.querySelector(`.back`);
+
+backArrow.addEventListener(`click`, () => {
+  changeScreen(greetingScreen);
+});
 export default statsScreen;

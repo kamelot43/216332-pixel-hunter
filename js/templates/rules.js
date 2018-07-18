@@ -1,4 +1,6 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import firstGameScreen from "./first-game";
+import greetingScreen from "./greeting";
 
 const template = `
 <header class="header">
@@ -22,7 +24,7 @@ const template = `
   </p>
   <form class="rules__form">
     <input class="rules__input" type="text" placeholder="Ваше Имя">
-    <button class="rules__button  continue" type="submit" disabled>Go!</button>
+    <button class="rules__button  continue" type="submit" >Go!</button>
   </form>
 </div>
 <footer class="footer">
@@ -37,4 +39,39 @@ const template = `
 </footer>`;
 
 const rulesScreen = renderScreen(template);
+const textInput = rulesScreen.querySelector(`.rules__input`);
+const submitBtn = rulesScreen.querySelector(`.rules__button`);
+const backArrow = rulesScreen.querySelector(`.back`);
+const rulesForm = rulesScreen.querySelector(`.rules__form`);
+submitBtn.disabled = true;
+
+const resetForm = () => {
+  rulesForm.reset();
+  submitBtn.disabled = true;
+};
+
+const isChecked = (element) => {
+  if (element.value.length >= 1) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+};
+
+textInput.addEventListener(`input`, (evt) => {
+  evt.preventDefault();
+  isChecked(evt.target);
+});
+
+rulesForm.addEventListener(`submit`, () => {
+  changeScreen(firstGameScreen);
+  resetForm();
+});
+
+backArrow.addEventListener(`click`, () => {
+  changeScreen(greetingScreen);
+  resetForm();
+});
+
+
 export default rulesScreen;

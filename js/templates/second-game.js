@@ -1,4 +1,6 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import thirdGameScreen from "./third-game";
+import greetingScreen from "./greeting";
 
 const template = `
 <header class="header">
@@ -57,4 +59,21 @@ const template = `
 </footer>`;
 
 const secondGameScreen = renderScreen(template);
+
+const formElement = secondGameScreen.querySelector(`.game__content`);
+const backArrow = secondGameScreen.querySelector(`.back`);
+
+formElement.addEventListener(`change`, (evt) => {
+  const target = evt.target;
+
+  if (target.checked) {
+    changeScreen(thirdGameScreen);
+    formElement.reset();
+  }
+});
+
+backArrow.addEventListener(`click`, () => {
+  changeScreen(greetingScreen);
+  formElement.reset();
+});
 export default secondGameScreen;

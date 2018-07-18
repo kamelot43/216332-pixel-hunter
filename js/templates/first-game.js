@@ -1,4 +1,6 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import secondGameScreen from "./second-game";
+import greetingScreen from "./greeting";
 
 const template = `
 <header class="header">
@@ -68,4 +70,26 @@ const template = `
 </footer>`;
 
 const firstGameScreen = renderScreen(template);
+
+const formElement = firstGameScreen.querySelector(`.game__content`);
+const inputs = [...formElement.getElementsByTagName(`input`)];
+const backArrow = firstGameScreen.querySelector(`.back`);
+
+
+formElement.addEventListener(`change`, () => {
+  const checkedInputs = inputs.filter((it) => {
+    return it.checked;
+  });
+
+  if (checkedInputs.length === 2) {
+    changeScreen(secondGameScreen);
+    formElement.reset();
+  }
+});
+
+backArrow.addEventListener(`click`, () => {
+  formElement.reset();
+  changeScreen(greetingScreen);
+});
+
 export default firstGameScreen;

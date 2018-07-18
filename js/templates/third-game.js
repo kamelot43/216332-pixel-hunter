@@ -1,4 +1,6 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import statsScreen from "./stats";
+import greetingScreen from "./greeting";
 
 const template = `
 <header class="header">
@@ -55,4 +57,20 @@ const template = `
 </footer>`;
 
 const thirdGameScreen = renderScreen(template);
+
+const formElement = thirdGameScreen.querySelector(`.game__content`);
+const backArrow = thirdGameScreen.querySelector(`.back`);
+
+formElement.addEventListener(`click`, (evt) => {
+  const target = evt.target;
+
+  if (target.classList.contains(`game__option`)) {
+    changeScreen(statsScreen);
+  }
+});
+
+backArrow.addEventListener(`click`, () => {
+  changeScreen(greetingScreen);
+});
+
 export default thirdGameScreen;

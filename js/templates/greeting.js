@@ -1,4 +1,5 @@
-import {renderScreen} from "../utils";
+import {renderScreen, changeScreen} from "../utils";
+import rulesScreen from "./rules";
 
 const template = `
 <div class="greeting central--blur">
@@ -26,4 +27,10 @@ const template = `
 </footer>`;
 
 const greetingScreen = renderScreen(template);
+const continueArrow = greetingScreen.querySelector(`.greeting__continue`);
+
+continueArrow.addEventListener(`click`, () => {
+  changeScreen(rulesScreen);
+});
+
 export default greetingScreen;
